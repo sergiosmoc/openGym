@@ -1,0 +1,36 @@
+name: Build WorkoutX Android APK
+on:
+  workflow_dispatch:
+  push:
+    branches: [workoutx]
+permissions:
+  contents: read
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: android-actions/setup-android@v3
+      - run: sdkmanager 'platforms;android-36' 'build-tools;36.0.0'
+      - run: npm ci
+        working-directory: frontend
+      - run: npm test -- src/lib/workoutx.test.js src/components/Media.test.jsx src/components/Media.clip-memory.test.jsx src/views/Settings.gifsize.test.jsx
+        working-directory: frontend
+      - run: npm run build:mobile
+        working-directory: frontend
+      - run: chmod +x gradlew && ./gradlew assembleSideloadDebug
+        working-directory: frontend/android
+      - uses: actions/upload-artifact@v4
+        with:
+          name: openGym-WorkoutX-APK
+          path: frontend/android/app/build/outputs/apk/sideload/debug/*.apk
+          retention-days: 14

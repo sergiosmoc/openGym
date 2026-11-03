@@ -1,6 +1,6 @@
 {
-  "appId": "ch.duartesantos.opengym",
-  "appName": "openGym",
+  "appId": "com.sergiosmoc.opengym.workoutx",
+  "appName": "openGym WorkoutX",
   "webDir": "dist",
   "backgroundColor": "#0c0e12",
   "android": {

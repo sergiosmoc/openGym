@@ -46,6 +46,7 @@ import { showsConnection, showsLocalLine } from '../components/SyncBanner.jsx'
 import BackupFolderRow, { useBackupFolder, autoBackupSubtitle } from '../components/BackupFolderRow.jsx'
 import AppIconRow from '../components/AppIconRow.jsx'
 import { AnimationQualityRow } from '../components/Animations.jsx'
+import { WorkoutXSettings } from '../components/WorkoutX.jsx'
 import { ServerSyncSection, KeptChangesRows, leaveServer, connectServer, passkeySignIn } from '../components/ServerSync.jsx'
 import { passwordOn, PasswordRow, openPasswordSignIn, openPasswordRegister } from '../components/PasswordAuth.jsx'
 import { usePasskeys, PasskeysRow, DeviceLinkRow, openDeviceLinkRedeem, PairSheet } from '../components/Passkeys.jsx'
@@ -582,6 +583,7 @@ export default function Settings({ page = null, find = null, via = null, entryKe
             never synced: the profile is not touched (components/Animations.jsx). */}
         <AnimationQualityRow />
       </Section>
+      <WorkoutXSettings />
       <Section>
         <Row icon="wrench" iconTint="var(--grey)" title={t('Fine-tuning')} subtitle={t('Buttons, timed sets')} accessory="chevron" onClick={() => open('advanced')} />
       </Section>
